@@ -34,7 +34,8 @@ public class Information {
 	private String name;	
 	private String phone;	 
 	private String email;
-	private LocalDate date;
+	private LocalDate date_birth;
+	private LocalDate date_scheduled;
 	private String hour;
 	private String question1;
 	private String question2;

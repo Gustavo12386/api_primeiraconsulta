@@ -33,7 +33,8 @@ public class InformationService {
        information.setName(dto.name());
        information.setPhone(dto.phone()); 
        information.setEmail(dto.email()); 
-       information.setDate(dto.date()); 
+       information.setDate_birth(dto.date_birth()); 
+       information.setDate_scheduled(dto.date_scheduled()); 
        information.setHour(dto.hour()); 
        information.setQuestion1(dto.question1());
        information.setQuestion1(dto.question2());
