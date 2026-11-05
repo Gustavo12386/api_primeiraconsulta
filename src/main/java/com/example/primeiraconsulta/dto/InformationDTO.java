@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
-public record InformationDTO(UUID especialityId, String name, String phone, String email,
+public record InformationDTO(UUID especialityId, String especiality_name, String name, String phone, String email,
 		LocalDate  date_birth, LocalDate date_scheduled, LocalTime hour, String question1,
 		String question2, String question3) {
 

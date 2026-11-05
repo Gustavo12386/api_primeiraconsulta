@@ -30,6 +30,7 @@ public class InformationService {
   
        Information information = new Information();
        information.setEspeciality(especiality);
+       information.setEspeciality_name(dto.especiality_name());
        information.setName(dto.name());
        information.setPhone(dto.phone()); 
        information.setEmail(dto.email()); 
