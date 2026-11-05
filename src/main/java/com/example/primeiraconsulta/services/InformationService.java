@@ -11,7 +11,7 @@ import com.example.primeiraconsulta.repositories.InformationRepository;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class InformationService {

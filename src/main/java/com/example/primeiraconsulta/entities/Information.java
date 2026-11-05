@@ -1,9 +1,10 @@
 package com.example.primeiraconsulta.entities;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Table(name = "tb_information_patient")
 public class Information {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	@ManyToOne
 	@JoinColumn(name = "especialization_id", referencedColumnName = "especialization_id")
@@ -36,7 +37,8 @@ public class Information {
 	private String email;
 	private LocalDate date_birth;
 	private LocalDate date_scheduled;
-	private String hour;
+	@Column(name = "scheduled_hour")
+	private LocalDate hour;
 	private String question1;
 	private String question2;
 	private String question3;
