@@ -37,8 +37,8 @@ public class InformationService {
        information.setDate_scheduled(dto.date_scheduled()); 
        information.setHour(dto.hour()); 
        information.setQuestion1(dto.question1());
-       information.setQuestion1(dto.question2());
-       information.setQuestion1(dto.question3());
+       information.setQuestion2(dto.question2());
+       information.setQuestion3(dto.question3());
        
        return repository_information.save(information);
     }

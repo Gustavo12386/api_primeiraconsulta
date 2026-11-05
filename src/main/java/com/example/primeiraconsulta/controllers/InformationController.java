@@ -29,7 +29,7 @@ public class InformationController {
     }
 	
 	 @GetMapping
-	 private ResponseEntity<List<Information >> getInfo(){
+	 public ResponseEntity<List<Information >> getInfo(){
 	       List<Information> list = service_information.getAllInformations();
 	       return ResponseEntity.ok(list);
 	 }

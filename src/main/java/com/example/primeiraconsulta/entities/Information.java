@@ -1,8 +1,10 @@
 package com.example.primeiraconsulta.entities;
 
 import java.time.LocalDate;
-
+import java.time.LocalTime;
 import java.util.UUID;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +29,12 @@ import lombok.Setter;
 @Table(name = "tb_information_patient")
 public class Information {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(
+        name = "id",
+        columnDefinition = "UUID"
+    )
+    @ColumnDefault("gen_random_uuid()")
 	private UUID id;
 	@ManyToOne
 	@JoinColumn(name = "especialization_id", referencedColumnName = "especialization_id")
@@ -38,7 +45,7 @@ public class Information {
 	private LocalDate date_birth;
 	private LocalDate date_scheduled;
 	@Column(name = "scheduled_hour")
-	private LocalDate hour;
+	private LocalTime hour;
 	private String question1;
 	private String question2;
 	private String question3;

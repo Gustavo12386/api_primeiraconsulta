@@ -1,9 +1,12 @@
 package com.example.primeiraconsulta.entities;
 
 import java.time.LocalDate;
-
+import java.time.LocalTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +30,15 @@ import lombok.Setter;
 @Table(name = "tb_hours")
 public class Hour {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID hour_id;
-	private LocalDate current_hour;	
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(
+        name = "hour_id",
+        columnDefinition = "UUID"
+    )
+    @ColumnDefault("gen_random_uuid()")
+	private UUID hourId;
+	@Column(name = "current_hour")
+    private LocalTime currentHour;
 	
 	@ManyToOne
 	@JoinColumn(name = "date_id", referencedColumnName = "date_id")
