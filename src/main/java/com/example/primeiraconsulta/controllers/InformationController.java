@@ -1,10 +1,12 @@
 package com.example.primeiraconsulta.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,22 +17,34 @@ import com.example.primeiraconsulta.dto.InformationDTO;
 import com.example.primeiraconsulta.entities.Information;
 import com.example.primeiraconsulta.services.InformationService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
-@RequestMapping(value = "/information")
+@RequestMapping(value = "/patient")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class InformationController {
 	
 	@Autowired	
-	private InformationService service_information;	
+	private InformationService service;	
 	
-	@PostMapping
-	  public ResponseEntity<Information> criarProduto(@RequestBody InformationDTO dto) {
-		Information novoProduto = service_information.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
-    }
+	  @PostMapping("/first-consultation")
+	    public ResponseEntity<Map<String, Object>> register(
+	            @RequestBody InformationDTO dto) {
+
+	        Information information = service.save(dto);
+
+	        return ResponseEntity
+	            .status(HttpStatus.CREATED)
+	            .body(Map.of(
+	                "message", "Primeira consulta cadastrada com sucesso!",
+	                "id", information.getId()
+	            ));
+	    }
 	
 	 @GetMapping
 	 public ResponseEntity<List<Information >> getInfo(){
-	       List<Information> list = service_information.getAllInformations();
+	       List<Information> list = service.getAllInformations();
 	       return ResponseEntity.ok(list);
 	 }
 }
