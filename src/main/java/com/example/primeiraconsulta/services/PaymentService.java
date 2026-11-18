@@ -38,7 +38,11 @@ public class PaymentService {
 	 private final WebClient.Builder webClientBuilder;
 
 	private final BigDecimal consultationAmount =
-	new BigDecimal("200.00");
+	new BigDecimal("100.00");
+	
+	public BigDecimal getConsultationAmount() {
+        return consultationAmount;
+    }
 	
 	  public void processWebhookNotification(String paymentId) {
 
@@ -327,7 +331,7 @@ public class PaymentService {
 
         String checkoutUrl = response.get("init_point").toString();
 
-        // 8. Atualizar pagamento com os dados do checkout
+        // Atualizar pagamento com os dados do checkout
         payment.setPreferenceId(preferenceId);
 
         paymentRepository.save(payment);
@@ -335,6 +339,7 @@ public class PaymentService {
         return new PaymentResponse(
             payment.getId(),
             preferenceId,
+            payment.getInformation().getName(),
             checkoutUrl,
             originalAmount,
             discountAmount,
@@ -342,4 +347,21 @@ public class PaymentService {
             payment.getStatus()
         );
     }
+	
+	public List<PaymentResponse> findAllPayments() {
+
+		 return paymentRepository.findAllWithPatient()
+			        .stream()
+			        .map(payment -> new PaymentResponse(
+			            payment.getId(),
+			            payment.getPreferenceId(),
+			            payment.getInformation().getName(),
+			            null,
+			            payment.getOriginalAmount(),
+			            payment.getDiscountAmount(),
+			            payment.getFinalAmount(),
+			            payment.getStatus()
+			        ))
+			        .toList();
+	}
 }

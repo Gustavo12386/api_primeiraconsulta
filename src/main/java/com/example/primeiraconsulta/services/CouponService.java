@@ -3,6 +3,7 @@ package com.example.primeiraconsulta.services;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,18 +37,21 @@ public class CouponService {
                     "Cupom não encontrado."
                 ));
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(
+        	    ZoneId.of("America/Sao_Paulo")
+        	);
 
         if (!Boolean.TRUE.equals(coupon.getActive())) {
             throw new IllegalArgumentException("Cupom inativo.");
         }
 
         if (coupon.getValidFrom() != null &&
-                now.isBefore(coupon.getValidFrom())) {
-            throw new IllegalArgumentException(
-                "Cupom ainda não está válido."
-            );
-        }
+        	    coupon.getValidFrom().isAfter(now)) {
+
+        	    throw new IllegalArgumentException(
+        	        "Cupom ainda não está válido."
+        	    );
+        	}
 
         if (coupon.getValidUntil() != null &&
                 now.isAfter(coupon.getValidUntil())) {

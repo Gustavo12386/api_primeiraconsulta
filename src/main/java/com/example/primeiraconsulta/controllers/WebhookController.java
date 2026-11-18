@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/webhooks")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class WebhookController {
 	private final MercadoPagoProperties mercadoPagoProperties;
     private final PaymentService paymentService;

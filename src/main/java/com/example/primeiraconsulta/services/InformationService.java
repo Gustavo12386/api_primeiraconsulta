@@ -14,6 +14,7 @@ import com.example.primeiraconsulta.repositories.InformationRepository;
 
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -104,5 +105,16 @@ public class InformationService {
 	public List<Information> getAllInformations() {
         return repository_information.findAll();
     }
+	
+	public String getPatientName(UUID informationId) {
+
+	    Information information = repository_information
+	        .findById(informationId)
+	        .orElseThrow(() ->
+	            new RuntimeException("Paciente não encontrado.")
+	        );
+
+	    return information.getName();
+	}
 
 }
